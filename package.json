@@ -1,0 +1,34 @@
+{
+  "name": "ragpi-discord",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "start:watch": "node --watch ./dist/index.js",
+    "build": "tsup ./src/index.ts",
+    "build:watch": "tsup ./src/index.ts --watch",
+    "dev": "pnpm build:watch & pnpm start:watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "gts": "^6.0.2",
+    "tsup": "^8.3.6",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "discord.js": "^14.17.3",
+    "dotenv": "^16.4.7"
+  }
+}
