@@ -11,12 +11,10 @@
     "dev": "pnpm build:watch & pnpm start:watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "gts lint",
-    "clean": "gts clean",
-    "compile": "tsc",
     "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run lint"
+    "clean": "gts clean",
+    "purge": "rm -rf node_modules && rm -rf dist",
+    "compile": "tsc"
   },
   "keywords": [],
   "author": "",
