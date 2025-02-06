@@ -10,15 +10,13 @@ import { ChatMessage, ChatRequest, ChatResponse } from './types';
 const shouldProcessMessage = (message: Message<boolean>): boolean => {
   if (message.author.bot || !message.content) return false;
 
-  if (config.DISCORD_CHANNEL_IDS) {
-    const allowedChannels = config.DISCORD_CHANNEL_IDS;
+  const allowedChannels = config.DISCORD_CHANNEL_IDS;
 
-    const channelId = message.channel.isThread()
-      ? message.channel.parentId
-      : message.channel.id;
+  const channelId = message.channel.isThread()
+    ? message.channel.parentId
+    : message.channel.id;
 
-    if (!channelId || !allowedChannels.includes(channelId)) return false;
-  }
+  if (!channelId || !allowedChannels.includes(channelId)) return false;
 
   if (config.REQUIRE_MENTION) {
     if (!message.mentions.users.has(message.client.user?.id || ''))

@@ -8,24 +8,22 @@ const ConfigSchema = z.object({
   RAGPI_BASE_URL: z.string({
     required_error: 'RAGPI_BASE_URL is required',
   }),
-  RAGPI_API_KEY: z.string().nullable().default(null),
+  DISCORD_CHANNEL_IDS: z
+    .string({
+      required_error: 'DISCORD_CHANNEL_IDS is required',
+    })
+    .transform((str) => {
+      return str.split(',').filter(Boolean);
+    }),
+  RAGPI_API_KEY: z.string().optional(),
   SOURCES: z
     .string()
-    .nullable()
+    .optional()
     .transform((str) => {
-      if (!str) return null;
+      if (!str) return [];
       return str.split(',').filter(Boolean);
-    })
-    .default(null),
-  CHAT_MODEL: z.string().nullable().default(null),
-  DISCORD_CHANNEL_IDS: z
-    .string()
-    .nullable()
-    .transform((str) => {
-      if (!str) return null;
-      return str.split(',').filter(Boolean);
-    })
-    .default(null),
+    }),
+  CHAT_MODEL: z.string().optional(),
   REQUIRE_MENTION: z
     .string()
     .transform((str) => {
