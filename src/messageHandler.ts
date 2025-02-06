@@ -18,7 +18,7 @@ const shouldProcessMessage = (message: Message<boolean>): boolean => {
 
   if (!channelId || !allowedChannels.includes(channelId)) return false;
 
-  if (config.REQUIRE_MENTION) {
+  if (config.DISCORD_REQUIRE_MENTION) {
     if (!message.mentions.users.has(message.client.user?.id || ''))
       return false;
   }
@@ -83,6 +83,10 @@ export const handleMessage = async (
 ): Promise<void> => {
   if (!shouldProcessMessage(message)) return;
 
+  console.debug(
+    `Processing message from ${message.author.id} in channel ${message.channel.id}`,
+  );
+
   try {
     const chatHistory = await message.channel.messages.fetch();
     const messages = formatChatHistory(chatHistory);
@@ -90,14 +94,16 @@ export const handleMessage = async (
     await message.channel.sendTyping();
 
     const request: ChatRequest = {
-      sources: config.SOURCES,
-      model: config.CHAT_MODEL,
+      sources: config.DISCORD_SOURCES,
+      model: config.DISCORD_CHAT_MODEL,
       messages,
     };
 
     const response = await fetchChatResponse(request);
 
     await sendMessage(message, response.message);
+
+    console.debug(`Successfully responded to user ${message.author.id}`);
   } catch (error) {
     console.error(error);
     await message.channel.send(

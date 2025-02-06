@@ -16,15 +16,15 @@ const ConfigSchema = z.object({
       return str.split(',').filter(Boolean);
     }),
   RAGPI_API_KEY: z.string().optional(),
-  SOURCES: z
+  DISCORD_SOURCES: z
     .string()
     .optional()
     .transform((str) => {
       if (!str) return [];
       return str.split(',').filter(Boolean);
     }),
-  CHAT_MODEL: z.string().optional(),
-  REQUIRE_MENTION: z
+  DISCORD_CHAT_MODEL: z.string().optional(),
+  DISCORD_REQUIRE_MENTION: z
     .string()
     .transform((str) => {
       if (!str) return true;
