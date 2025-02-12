@@ -84,7 +84,7 @@ export const handleMessage = async (
   if (!shouldProcessMessage(message)) return;
 
   console.debug(
-    `Processing message from ${message.author.id} in channel ${message.channel.id}`,
+    `Processing message from user ${message.author.id} in channel ${message.channel.id}`,
   );
 
   try {
@@ -103,7 +103,7 @@ export const handleMessage = async (
 
     await sendMessage(message, response.message);
 
-    console.debug(`Successfully responded to user ${message.author.id}`);
+    console.debug(`Successfully responded in channel ${message.channel.id}`);
   } catch (error) {
     console.error(error);
     await message.channel.send(
