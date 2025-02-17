@@ -94,8 +94,7 @@ export const handleMessage = async (
     await message.channel.sendTyping();
 
     const request: ChatRequest = {
-      sources: config.DISCORD_SOURCES,
-      model: config.DISCORD_CHAT_MODEL,
+      sources: config.RAGPI_SOURCES,
       messages,
     };
 
