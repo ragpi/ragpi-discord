@@ -26,7 +26,7 @@ const ConfigSchema = z.object({
   DISCORD_REQUIRE_MENTION: z
     .string()
     .transform((str) => {
-      if (!str) return true;
+      if (!str) return false;
       return ['true', 'True', 'TRUE'].includes(str);
     })
     .default('false'),
