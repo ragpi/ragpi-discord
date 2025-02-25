@@ -1,6 +1,7 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { config } from './config';
 import { handleMessage } from './messageHandler';
+import { logger } from './logger';
 
 const client = new Client({
   intents: [
@@ -11,7 +12,7 @@ const client = new Client({
 });
 
 client.once(Events.ClientReady, (readyClient) => {
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+  logger.info(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.MessageCreate, handleMessage);

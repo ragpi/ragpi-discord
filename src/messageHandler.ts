@@ -6,6 +6,7 @@ import {
 } from 'discord.js';
 import { config } from './config';
 import { ChatMessage, ChatRequest, ChatResponse } from './types';
+import { logger } from './logger';
 
 const shouldProcessMessage = (message: Message<boolean>): boolean => {
   if (message.author.bot || !message.content) return false;
@@ -58,7 +59,7 @@ const fetchChatResponse = async (
     return response.json() as Promise<ChatResponse>;
   } else {
     const error = await response.json();
-    console.error('Error:', JSON.stringify(error, null, 2));
+    logger.error('Error:', JSON.stringify(error, null, 2));
     throw new Error('An error occurred while fetching chat response');
   }
 };
@@ -83,7 +84,7 @@ export const handleMessage = async (
 ): Promise<void> => {
   if (!shouldProcessMessage(message)) return;
 
-  console.debug(
+  logger.debug(
     `Processing message from user ${message.author.id} in channel ${message.channel.id}`,
   );
 
@@ -102,9 +103,9 @@ export const handleMessage = async (
 
     await sendMessage(message, response.message);
 
-    console.debug(`Successfully responded in channel ${message.channel.id}`);
+    logger.debug(`Successfully responded in channel ${message.channel.id}`);
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     await message.channel.send(
       'Sorry, an error occurred. Please try again later.',
     );

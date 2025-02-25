@@ -30,6 +30,12 @@ const ConfigSchema = z.object({
       return ['true', 'True', 'TRUE'].includes(str);
     })
     .default('false'),
+  LOG_LEVEL: z
+    .string()
+    .transform((s) => s.toLowerCase())
+    .pipe(z.enum(['error', 'warn', 'info', 'debug']))
+    .default('info'),
+  NODE_ENV: z.enum(['development', 'production']).default('development'),
 });
 
 function validateConfig() {
