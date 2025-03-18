@@ -9,6 +9,5 @@ export interface ChatResponse {
 
 export interface ChatRequest {
   sources: string[];
-  model?: string;
   messages: ChatMessage[];
 }
