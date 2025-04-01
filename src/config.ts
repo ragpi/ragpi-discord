@@ -35,7 +35,7 @@ const ConfigSchema = z.object({
     .transform((s) => s.toLowerCase())
     .pipe(z.enum(['error', 'warn', 'info', 'debug']))
     .default('info'),
-  NODE_ENV: z.enum(['development', 'production']).default('development'),
+  NODE_ENV: z.enum(['development', 'production']).default('production'),
 });
 
 function validateConfig() {
