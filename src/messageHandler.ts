@@ -59,7 +59,7 @@ const fetchChatResponse = async (
     return response.json() as Promise<ChatResponse>;
   } else {
     const error = await response.json();
-    logger.error('Error:', JSON.stringify(error, null, 2));
+    logger.error({ err: error });
     throw new Error('An error occurred while fetching chat response');
   }
 };
